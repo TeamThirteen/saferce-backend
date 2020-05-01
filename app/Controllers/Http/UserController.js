@@ -10,6 +10,18 @@ class UserController {
 
     return user;
   }
+
+  async delete({ params }) {
+    const { id } = params;
+
+    const user = await User.find(id);
+
+    user.active = false;
+
+    await user.save();
+
+    return user;
+  }
 }
 
 module.exports = UserController;
