@@ -23,3 +23,4 @@ Route.get('/', async () => {
 
 Route.post('/users', 'UserController.create');
 Route.post('/sessions', 'SessionController.create');
+Route.delete('users/:id', 'UserController.delete').middleware(['auth']);
