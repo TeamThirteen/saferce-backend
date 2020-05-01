@@ -1,4 +1,5 @@
 'use strict';
+
 const Database = use('Database');
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,6 @@ const Route = use('Route');
 Route.get('/', async () => {
   return await Database.table('Teste').select('*');
 });
+
+Route.post('/users', 'UserController.create');
+Route.post('/sessions', 'SessionController.create');
