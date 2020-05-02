@@ -28,5 +28,7 @@ Route.group(() => {
 
   Route.get('/categories', 'CategoryController.index');
 
+  Route.get('/types', 'TypeController.index');
+
   Route.get('/safeitems', 'CategoryController.index');
 }).middleware(['auth']);
