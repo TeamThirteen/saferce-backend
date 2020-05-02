@@ -27,7 +27,7 @@ class EvaluationController {
       'comment.required': 'Faça um comentário',
     };
 
-    const dataEvaluation = request.only(['user_id', 'provider_id', 'rating', 'comment', 'answer']);
+    const dataEvaluation = request.only(['user_id', 'provider_id', 'rating', 'comment']);
 
     const validation = await validate(dataEvaluation, rules, messages);
 

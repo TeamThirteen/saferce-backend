@@ -20,7 +20,7 @@ const Route = use('Route');
 Route.post('/users', 'UserController.create');
 
 Route.post('/sessions', 'SessionController.create');
-Route.get('/evaluations', 'EvaluationController.index');
+
 Route.group(() => {
   Route.delete('/users/:id', 'UserController.delete');
 
@@ -32,5 +32,8 @@ Route.group(() => {
 
   Route.get('/safeitems', 'SafeItemController.index');
 
+  Route.get('/evaluations', 'EvaluationController.index');
   Route.post('/evaluations', 'EvaluationController.store');
+
+  Route.post('/answer', 'AnswerController.store');
 }).middleware(['auth']);
