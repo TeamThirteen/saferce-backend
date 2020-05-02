@@ -23,6 +23,8 @@ Route.post('/sessions', 'SessionController.create');
 
 Route.get('/categories', 'CategoryController.index');
 
+Route.post('/evaluations', 'EvaluationController.store');
+
 Route.group(() => {
   Route.delete('/users/:id', 'UserController.delete');
 
