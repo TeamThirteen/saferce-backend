@@ -17,10 +17,9 @@ const Database = use('Database');
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route');
 
-Route.get('/', async () => {
-  return await Database.table('Teste').select('*');
-});
-
 Route.post('/users', 'UserController.create');
+Route.delete('/users/:id', 'UserController.delete').middleware(['auth']);
+
 Route.post('/sessions', 'SessionController.create');
-Route.delete('users/:id', 'UserController.delete').middleware(['auth']);
+
+Route.post('/file', 'FileController.store');
