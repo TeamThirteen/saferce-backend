@@ -26,7 +26,9 @@ Route.get('/categories', 'CategoryController.index');
 Route.group(() => {
   Route.delete('/users/:id', 'UserController.delete');
 
+  Route.post('/file', 'FileController.store');
+
   Route.get('/categories', 'CategoryController.index');
 
-  Route.post('/file', 'FileController.store');
+  Route.get('/safeitems', 'CategoryController.index');
 }).middleware(['auth']);
