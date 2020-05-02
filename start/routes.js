@@ -18,8 +18,12 @@ const Database = use('Database');
 const Route = use('Route');
 
 Route.post('/users', 'UserController.create');
-Route.delete('/users/:id', 'UserController.delete').middleware(['auth']);
 
 Route.post('/sessions', 'SessionController.create');
 
 Route.post('/file', 'FileController.store');
+
+//  Routes that must be authenticated
+Route.group(() => {
+  Route.delete('/users/:id', 'UserController.delete').middleware(['auth']);
+}).middleware(['auth']);
