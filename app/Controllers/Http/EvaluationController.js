@@ -4,6 +4,14 @@ const Evaluation = use('App/Models/Evaluation');
 const { validate } = use('Validator');
 
 class EvaluationController {
+  async index({ request }) {
+    const idProvider = request.only(['provider_id']);
+
+    const evaluations = await Evaluation.query().where('provider_id', idProvider).fetch();
+
+    return evaluations;
+  }
+
   async store({ request }) {
     const rules = {
       user_id: 'required',
