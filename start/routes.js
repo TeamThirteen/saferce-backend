@@ -21,8 +21,6 @@ Route.post('/users', 'UserController.create');
 
 Route.post('/sessions', 'SessionController.create');
 
-Route.get('/categories', 'CategoryController.index');
-
 Route.group(() => {
   Route.delete('/users/:id', 'UserController.delete');
 
