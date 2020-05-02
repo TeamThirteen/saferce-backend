@@ -21,16 +21,14 @@ Route.post('/users', 'UserController.create');
 
 Route.post('/sessions', 'SessionController.create');
 
-Route.get('/categories', 'CategoryController.index');
-
-Route.post('/evaluations', 'EvaluationController.store');
-
 Route.group(() => {
   Route.delete('/users/:id', 'UserController.delete');
 
   Route.post('/file', 'FileController.store');
 
   Route.get('/categories', 'CategoryController.index');
+
+  Route.get('/types', 'TypeController.index');
 
   Route.get('/safeitems', 'CategoryController.index');
 }).middleware(['auth']);

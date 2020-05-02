@@ -3,8 +3,14 @@
 const User = use('App/Models/User');
 
 class UserController {
-  async create({ request }) {
+  async create({ request, response }) {
     const data = request.only(['name', 'email', 'password', 'provider']);
+
+    const userExists = await User.findBy('email', data.email);
+
+    if (userExists) {
+      return response.json({ error: 'User with this email already exists!' });
+    }
 
     const user = await User.create(data);
 
