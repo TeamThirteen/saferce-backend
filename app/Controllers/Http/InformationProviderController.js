@@ -69,6 +69,24 @@ class InformationProviderController {
       return response.status(500).json({ error: 'Something goes wrong. Try again!' });
     }
   }
+
+  async index({ params, response }) {
+    const { id } = params;
+
+    if (!id) {
+      const providers = await InformationProvider.all();
+
+      return providers;
+    }
+
+    const provider = await InformationProvider.find(id);
+
+    if (!provider) {
+      return response.status(400).json({ error: 'Provider not found' });
+    }
+
+    return provider;
+  }
 }
 
 module.exports = InformationProviderController;
