@@ -18,7 +18,6 @@ const Database = use('Database');
 const Route = use('Route');
 
 Route.post('/users', 'UserController.create');
-
 Route.post('/sessions', 'SessionController.create');
 
 Route.group(() => {
@@ -34,6 +33,10 @@ Route.group(() => {
 
   Route.get('/providers', 'InformationProviderController.index');
   Route.get('/providers/:id', 'InformationProviderController.index');
-  // Route.get('/providers/:id', 'InformationProviderController.index');
   Route.post('/provider', 'InformationProviderController.store');
+
+  Route.get('/evaluations', 'EvaluationController.index');
+  Route.post('/evaluations', 'EvaluationController.store');
+
+  Route.post('/answer', 'AnswerController.store');
 }).middleware(['auth']);
