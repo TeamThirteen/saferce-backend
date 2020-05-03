@@ -1,12 +1,22 @@
 'use strict';
 
+const User = use('App/Models/User');
+
 class SessionController {
   async create({ request, auth }) {
-    const { email, password } = request.all();
+    const { email, password: passwordUser } = request.all();
 
-    const token = await auth.attempt(email, password);
+    const { token } = await auth.attempt(email, passwordUser);
 
-    return token;
+    const userData = await User.findBy('email', email);
+    const userFile = await userData.file().fetch();
+
+    const user = {
+      image: userFile !== null ? userFile.url : null,
+      userData,
+    };
+
+    return { token, user };
   }
 }
 

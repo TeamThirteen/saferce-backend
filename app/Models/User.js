@@ -21,8 +21,17 @@ class User extends Model {
     });
   }
 
+
   informations() {
     return this.hasOne('App/Models/InformationProvider');
+  }
+  
+  static get hidden() {
+    return ['password'];
+  }
+
+  file() {
+    return this.hasOne('App/Models/File');
   }
 
   /**
