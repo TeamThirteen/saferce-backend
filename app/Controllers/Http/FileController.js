@@ -4,7 +4,8 @@ const Driver = use('Drive');
 const File = use('App/Models/File');
 
 class FileController {
-  async store({ request, response }) {
+  async store({ auth, request, response }) {
+    const { user } = auth;
     await request.multipart
       .file('image', {}, async (file) => {
         try {
@@ -22,9 +23,12 @@ class FileController {
             key: key,
             url: url,
             content_type: contentType,
+            user_id: user.id,
           });
 
-          return response.json('Foto atualizada com sucesso');
+          return response.json({
+            url,
+          });
         } catch (err) {
           return response.json({
             error: {
