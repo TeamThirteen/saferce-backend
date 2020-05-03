@@ -11,7 +11,15 @@ class InformationProviderController {
   async store({ auth, request, response }) {
     const { user } = auth;
     const allData = request.all();
-    const { category_id, type_id, address, number, district, city, state, cep } = allData;
+    const { category_id, type_id, address, number, district, city, state, cep, title } = allData;
+
+    if (!cep) {
+      return response.status(400).json({ error: 'CEP is required' });
+    }
+
+    if (!title) {
+      return response.status(400).json({ error: 'Title is required' });
+    }
 
     const category = await Category.find(category_id);
 
