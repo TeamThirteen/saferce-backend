@@ -31,4 +31,6 @@ Route.group(() => {
   Route.get('/types', 'TypeController.index');
 
   Route.get('/safeitems', 'CategoryController.index');
+
+  Route.post('/provider', 'InformationProviderController.store');
 }).middleware(['auth']);
