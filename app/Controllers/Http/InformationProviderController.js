@@ -74,12 +74,13 @@ class InformationProviderController {
     const { id } = params;
 
     if (!id) {
-      const providers = await InformationProvider.all();
+      const providers = await InformationProvider.query().with('safe_items').fetch();
 
       return providers;
     }
 
     const provider = await InformationProvider.find(id);
+    await provider.load('safe_items');
 
     if (!provider) {
       return response.status(400).json({ error: 'Provider not found' });

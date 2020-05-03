@@ -7,6 +7,10 @@ class InformationProvider extends Model {
   user() {
     return this.belongsTo('App/Models/User');
   }
+
+  safe_items() {
+    return this.belongsToMany('App/Models/SafeItem').pivotTable('safe_itens_information_providers');
+  }
 }
 
 module.exports = InformationProvider;
