@@ -76,18 +76,19 @@ class InformationProviderController {
     const itemsCount = await SafeItem.getCount();
     let providersWithSerializer = '';
 
-    if (!category_id) {
+    if (category_id) {
+      providersWithSerializer = await InformationProvider.query()
+      .where('category_id', category_id)
+      .with('safe_items')
+      .with('category')
+      .fetch();
+    }
+    else{
       providersWithSerializer = await InformationProvider.query()
       .with('safe_items')
       .with('category')
       .fetch();
     }
-
-    providersWithSerializer = await InformationProvider.query()
-      .where('category_id', category_id)
-      .with('safe_items')
-      .with('category')
-      .fetch();
 
     const providersJSON = providersWithSerializer.toJSON();
 
