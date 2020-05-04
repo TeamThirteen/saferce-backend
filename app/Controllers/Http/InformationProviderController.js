@@ -6,7 +6,7 @@ const InformationProvider = use('App/Models/InformationProvider');
 const SafeItem = use('App/Models/SafeItem');
 const Category = use('App/Models/Category');
 const Type = use('App/Models/Type');
-const Axios = use('Axios');
+const Axios = use('axios');
 
 class InformationProviderController {
   async store({ auth, request, response }) {
