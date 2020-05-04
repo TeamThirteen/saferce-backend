@@ -73,6 +73,8 @@ class InformationProviderController {
   async index({ request }) {
     const category_id = request.input('category');
 
+    const itemsCount = await SafeItem.getCount();
+
     if (!category_id) {
       const providersWithSerializer = await InformationProvider.query().with('safe_items').fetch();
       const providersJSON = providersWithSerializer.toJSON();
@@ -95,8 +97,6 @@ class InformationProviderController {
       .fetch();
 
     const providersJSON = providersWithSerializer.toJSON();
-
-    const itemsCount = await SafeItem.getCount();
 
     const providers = providersJSON.map((provider) => {
       const numberOfItems = provider.safe_items.length;
