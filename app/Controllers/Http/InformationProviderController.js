@@ -77,12 +77,16 @@ class InformationProviderController {
     let providersWithSerializer = '';
 
     if (!category_id) {
-      providersWithSerializer = await InformationProvider.query().with(['safe_items', 'category']).fetch();
+      providersWithSerializer = await InformationProvider.query()
+      .with('safe_items')
+      .with('category')
+      .fetch();
     }
 
     providersWithSerializer = await InformationProvider.query()
       .where('category_id', category_id)
-      .with(['safe_items', 'category'])
+      .with('safe_items')
+      .with('category')
       .fetch();
 
     const providersJSON = providersWithSerializer.toJSON();
