@@ -13,9 +13,11 @@ Saferce is an application where users can find service providers closest to thei
 <!-- vscode-markdown-toc -->
 
 - [Install Dependencies](#InstallDependencies)
+- [Database](#Database)
+- [Enviroment Variables](#EnviromentVariables)
 - [Run](#Serve)
 - [What I Used](#WhatIUsed)
-- [Database](#Database)
+- [Routes](#Routes)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
@@ -29,6 +31,22 @@ Saferce is an application where users can find service providers closest to thei
 
 To make things easier, install globally [AdonisJS CLI](https://adonisjs.com/docs/4.1/installation)
 
+## <a name='Database'></a>Database
+
+- It is necessary to create a mysql database;
+- To create the tables in the database created earlier, run the following command:
+
+      adonis migration:run
+
+## <a name='EnviromentVariables'></a>Enviroment Variables
+
+The configuration file for the variables can be found in a file at the root of the project with the name `.env.example`. Make a copy of the file before running the server and rename it to .env and make necessary changes in `.env` file.
+
+- It is necessary to create a mysql database;
+- To create the tables in the database created earlier, run the following command:
+
+      adonis migration:run
+
 ## <a name='Serve'></a>Run
 
     adonis serve --dev
@@ -39,9 +57,68 @@ To make things easier, install globally [AdonisJS CLI](https://adonisjs.com/docs
 - Validator
 - Axios
 
-## <a name='Database'></a>Database
+## <a name='Routes'></a>Routes
 
-- It is necessary to create a mysql database;
-- To create the tables in the database created earlier, run the following command:
+### `/users`
 
-      adonis migration:run
+| **Verb** | **URL**         | **Action** | **Route Name** |
+| -------- | --------------- | ---------- | -------------- |
+| POST     | `/users/`       | store      | users.create   |
+| DELETE   | `/users/{user}` | delete     | users.delete   |
+
+### `/sessions`
+
+| **Verb** | **URL**      | **Action** | **Route Name**  |
+| -------- | ------------ | ---------- | --------------- |
+| POST     | `/sessions/` | store      | sessions.create |
+
+### `/file`
+
+| **Verb** | **URL**  | **Action** | **Route Name** |
+| -------- | -------- | ---------- | -------------- |
+| POST     | `/file/` | store      | file.store     |
+
+### `/categories`
+
+| **Verb** | **URL**        | **Action** | **Route Name**   |
+| -------- | -------------- | ---------- | ---------------- |
+| GET      | `/categories/` | index      | categories.index |
+
+### `/types`
+
+| **Verb** | **URL**   | **Action** | **Route Name** |
+| -------- | --------- | ---------- | -------------- |
+| GET      | `/types/` | index      | types.index    |
+
+### `/safeitems`
+
+| **Verb** | **URL**       | **Action** | **Route Name**  |
+| -------- | ------------- | ---------- | --------------- |
+| GET      | `/safeitems/` | index      | safeitems.index |
+
+### `/providers`
+
+| **Verb** | **URL**       | **Action** | **Route Name**  |
+| -------- | ------------- | ---------- | --------------- |
+| GET      | `/safeitems/` | index      | safeitems.index |
+
+### `/providers`
+
+| **Verb** | **URL**                             | **Action** | **Route Name**  |
+| -------- | ----------------------------------- | ---------- | --------------- |
+| GET      | `/providers/?category={categoryId}` | index      | providers.index |
+| GET      | `/providers/{provider}`             | show       | providers.show  |
+| POST     | `/providers/`                       | store      | providers.store |
+
+### `/evaluations`
+
+| **Verb** | **URL**         | **Action** | **Route Name**    |
+| -------- | --------------- | ---------- | ----------------- |
+| GET      | `/evaluations`  | index      | evaluations.index |
+| POST     | `/evaluations/` | store      | evaluations.store |
+
+### `/answer`
+
+| **Verb** | **URL**    | **Action** | **Route Name** |
+| -------- | ---------- | ---------- | -------------- |
+| POST     | `/answer/` | store      | answer.store   |

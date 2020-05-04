@@ -29,7 +29,7 @@ Route.group(() => {
 
   Route.get('/types', 'TypeController.index');
 
-  Route.get('/safeitems', 'CategoryController.index');
+  Route.get('/safeitems', 'SafeItemController.index');
 
   Route.get('/providers', 'InformationProviderController.index');
   Route.get('/providers/:id', 'InformationProviderController.show');
