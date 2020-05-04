@@ -32,7 +32,7 @@ Route.group(() => {
   Route.get('/safeitems', 'CategoryController.index');
 
   Route.get('/providers', 'InformationProviderController.index');
-  Route.get('/providers/:id', 'InformationProviderController.index');
+  Route.get('/providers/:id', 'InformationProviderController.show');
   Route.post('/provider', 'InformationProviderController.store');
 
   Route.get('/evaluations', 'EvaluationController.index');
