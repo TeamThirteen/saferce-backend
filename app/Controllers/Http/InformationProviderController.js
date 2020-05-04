@@ -70,8 +70,14 @@ class InformationProviderController {
     }
   }
 
-  async index({ response }) {
-    const providersWithSerializer = await InformationProvider.query().with('safe_items').fetch();
+  async index({ request }) {
+    const category_id = request.input('category');
+
+    const providersWithSerializer = await InformationProvider.query()
+      .where('category_id', category_id)
+      .with('safe_items')
+      .fetch();
+
     const providersJSON = providersWithSerializer.toJSON();
 
     const itemsCount = await SafeItem.getCount();
@@ -88,8 +94,10 @@ class InformationProviderController {
     return providers;
   }
 
-  async show({ params }) {
+  async show({ params, request }) {
     const { id } = params;
+
+    console.log(request.input('category'));
 
     const providersWithSerializer = await InformationProvider.find(id);
     await providersWithSerializer.load('safe_items');
