@@ -13,7 +13,7 @@ class InformationProvider extends Model {
   }
 
   category() {
-    return this.hasOne('App/Models/Category');
+    return this.belongsTo('App/Models/Category');
   }
 }
 
