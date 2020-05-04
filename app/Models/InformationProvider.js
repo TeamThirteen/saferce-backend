@@ -11,6 +11,10 @@ class InformationProvider extends Model {
   safe_items() {
     return this.belongsToMany('App/Models/SafeItem').pivotTable('safe_itens_information_providers');
   }
+
+  category() {
+    return this.hasOne('App/Models/Category');
+  }
 }
 
 module.exports = InformationProvider;
