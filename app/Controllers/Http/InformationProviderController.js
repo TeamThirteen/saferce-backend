@@ -3,6 +3,7 @@
 const Env = use('Env');
 
 const InformationProvider = use('App/Models/InformationProvider');
+const SafeItem = use('App/Models/SafeItem');
 const Category = use('App/Models/Category');
 const Type = use('App/Models/Type');
 const Axios = use('Axios');
@@ -65,27 +66,56 @@ class InformationProviderController {
         },
       };
     } catch (error) {
-      console.log(error);
       return response.status(500).json({ error: 'Something goes wrong. Try again!' });
     }
   }
 
-  async index({ params, response }) {
+  async index({ request }) {
+    const category_id = request.input('category');
+
+    const providersWithSerializer = await InformationProvider.query()
+      .where('category_id', category_id)
+      .with('safe_items')
+      .fetch();
+
+    const providersJSON = providersWithSerializer.toJSON();
+
+    const itemsCount = await SafeItem.getCount();
+
+    const providers = providersJSON.map((provider) => {
+      const numberOfItems = provider.safe_items.length;
+      const rating = (numberOfItems * 100) / itemsCount / 20;
+      return {
+        ...provider,
+        rating,
+      };
+    });
+
+    return providers;
+  }
+
+  async show({ params, request }) {
     const { id } = params;
 
-    if (!id) {
-      const providers = await InformationProvider.all();
+    const providersWithSerializer = await InformationProvider.find(id);
+    await providersWithSerializer.load('safe_items');
 
-      return providers;
-    }
-
-    const provider = await InformationProvider.find(id);
+    const provider = providersWithSerializer.toJSON();
 
     if (!provider) {
       return response.status(400).json({ error: 'Provider not found' });
     }
 
-    return provider;
+    const itemsCount = await SafeItem.getCount();
+
+    const numberOfItems = provider.safe_items.length;
+
+    const rating = (numberOfItems * 100) / itemsCount / 20;
+
+    return {
+      ...provider,
+      rating,
+    };
   }
 }
 
