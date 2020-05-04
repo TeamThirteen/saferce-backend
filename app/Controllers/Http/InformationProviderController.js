@@ -97,8 +97,6 @@ class InformationProviderController {
   async show({ params, request }) {
     const { id } = params;
 
-    console.log(request.input('category'));
-
     const providersWithSerializer = await InformationProvider.find(id);
     await providersWithSerializer.load('safe_items');
 
