@@ -108,7 +108,8 @@ class InformationProviderController {
     const { id } = params;
 
     const providersWithSerializer = await InformationProvider.find(id);
-    await providersWithSerializer.load('safe_items').load('category');
+    await providersWithSerializer.load('safe_items');
+    await providersWithSerializer.load('category')
 
     const provider = providersWithSerializer.toJSON();
 
